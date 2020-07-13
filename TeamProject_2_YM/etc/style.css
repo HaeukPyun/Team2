@@ -1,0 +1,53 @@
+
+#body{
+    background-image: url("../imgs/windowback.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative; 
+    }
+    #tetris_icon{
+    width: 50px;
+    height: 50px;
+    position: relative;
+    }
+     #iframe{
+    display:none; 
+    position: absolute;
+    }
+
+    #window_frame{
+    display:none; 
+    position: absolute;
+    bottom: -955px;
+    left: 0;
+    background-color: rgb(46, 44, 44);
+    transition: .5s;
+    
+        
+    }
+           
+    #footer{
+     position: absolute;
+     bottom: -955px;
+     width: 100%;
+     background-color: rgb(46, 44, 44);
+     height: 40px;
+     clear: both;
+     background-image: url('../imgs/footer_window.png');
+    }
+
+     #textarea{
+    position: absolute;
+    left :47px;
+    }
+
+    #clock{
+      position: fixed;
+      left: 95%;
+      color: white;
+      font-size:13px
+    }
+
+    #chrome_icon{
+      position: relative;
+    }
