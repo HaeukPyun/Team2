@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h2 {color: rgb(121, 165, 248);}
+        table{border:solid rgb(121, 165, 248); border-collapse: collapse;}
+        td {width: 100px; height: 100px;}
+        td:hover {background-color: rgb(121, 165, 248);;}
+    </style>
+    <script src="http://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+<h2>포켓몬 짝맞추기</h2>
+<hr>
+<table id="puzzle" border="1" width="600" height="600">
+    <tr>
+        <td width="100"></td>
+        <td width="100"></td>
+        <td width="100"></td>
+        <td width="100"></td>
+        <td width="100"></td>
+        <td width="100"></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+</table>
+
+<script>
+    var cells = document.getElementById('puzzle').getElementsByTagName("td");
+    var timer = document.getElementById("timer");
+    var backImgArr = [];
+    var startSec = 0;
+    var endSec = 0;
+    var cnt=0;
+    
+    for(var i=0; i<cells.length; i++) {
+        backImgArr[i] = new Image(100,100)
+        backImgArr[i].src = 'p0.png';
+        cells[i].i = i;
+        cells[i].appendChild(backImgArr[i]);
+    }
+
+    var srcArr = ['p1.png','p2.png','p3.png','p4.png','p5.png','p6.png',
+        'p7.png','p8.png','p9.png','p10.png','p11.png','p12.png',
+        'p13.png','p14.png','p15.png','p16.png','p17.png','p18.png'];
+    
+    function init() {
+        for(var i=0; i<cells.length; ) {
+            var index = Math.floor(Math.random()*36);
+            if(cells[index].word == null) {
+                var idx = index%18;
+                cells[index].idx = idx;
+                cells[index].word = 'img/'+srcArr[i%18];
+                backImgArr[index].src= 'img/'+srcArr[i%18];
+                i++;
+            }
+        }
+        setTimeout(start, 4000);
+    }
+    
+    function start() {
+        startSec = Date.parse(new Date());
+        for(var i=0; i<cells.length; i++) {
+            backImgArr[i].src = 'img/p0.png';
+            cells[i].onclick = function() {
+                backImgArr[this.i].src = this.word;
+                compare(this);
+            };
+        }
+    }
+    
+    var firstCell = null;
+    function compare(cell) {
+        if(firstCell == null) {
+            firstCell = cell;
+        } else {
+            if(firstCell == cell) {
+                return;
+            }
+            if(firstCell.word == cell.word) {
+                firstCell.onclick = null;
+                cell.onclick = null;
+                firstCell = null;
+                cnt++;
+
+                if(cnt == 18) {
+                    endSec = Date.parse(new Date());
+                    alert((endSec - startSec)/1000 + "초 걸렸습니다.");
+                }
+            } else {
+                setTimeout(function () {
+                    backImgArr[firstCell.i].src = 'img/p0.png';
+                    backImgArr[cell.i].src = 'img/p0.png';
+                    firstCell = null;
+                }, 300);
+            }
+        }
+    }
+    init();
+</script>
+</body>
+</html>
