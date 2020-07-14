@@ -6,39 +6,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        div{
+        p {
             font-weight: bolder;
+            font-size: xx-large;
             text-align: center;
         }
     </style>
 </head>
 
 <body>
-    <div>welcome userName</div>
+    
+    <div id="openDivId"></div>
+    
+    <p>
+        <script id="opneScriptId"> // user login
+            var result = confirm("계정확인, Kosmo_team #2");
+            var openMessage = "welcome userName";
+            var closeMessage = "not found userName";
 
-    <script> // user login
-        var result = confirm("계정확인, Kosmo_team #2");
 
-        if (result) {
-            confirm("확인완료");            
-        } else {
-            var userpwd = prompt("password 설정");
-            var userpwdArr = [];
-            userpwdArr.push(userpwd);
-            
-            var login = prompt("password 입력")
-            if (login == userpwdArr.pop()) {
+            if (result) {
                 confirm("확인완료");
+                document.write(openMessage);
+
+
+                //@import >> App실행화면
+
+
+            } else {
+                var userpwd = prompt("password 설정");
+                var userpwdArr = [];
+                userpwdArr.push(userpwd);
+
+                var login = prompt("password 입력")
+                if (login == userpwdArr.pop()) {
+                    confirm("확인완료");
+                    document.write(openMessage);
+
+
+                    //@import >> App실행화면
+
+
+
+                } else {
+                    alert("password 불일치");
+                    document.write(closeMessage);
+
+                }
             }
-        }
 
-        console.log("userpwdArr >> " + userpwdArr.pop());
+            console.log("userpwdArr >> " + userpwdArr.pop()); // 삭제무방.
 
-    </script>
-
+        </script>
+    </p>
+    <hr>
+    @import >> App 실행화면
 </body>
 
 </html>
 </body>
-</html>
 
+</html>
