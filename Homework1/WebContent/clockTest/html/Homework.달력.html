@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>달력</title>
 </head>
 <style type="text/css">
-    table{
+   #calendar{
+       position: absolute;
+       left: 15;
         border-radius: 30px;
         width: 600px;
         height: 500px;
@@ -30,7 +32,14 @@
         }
         #back1{
     color: dodgerblue;
+    position: relative;
+    top: 500px;
+       left: 15px;
+       font-size: 20px;
  
+      }
+      h1{
+          color: navy;
       }
 
 </style>
@@ -94,7 +103,7 @@
 </script>
 <body>
     <p></p>
-   <h3> ★2020년 달력☆</h3>
+   <h1> ★2020년 달력☆</h1>
 <table id="calendar" border="2" align="center" style="border-color: navy;">
 
     <tr>
@@ -113,10 +122,11 @@
         <td id="saturday">토</td>
     </tr>
 </table>
-<a href="Homework.index.html" id="back1"   >뒤로가기</a>
+
 <script type="text/javascript" language='text/javascript'>
       buildCalendar();
     
 </script>
+<a href="Homework.index.html" id="back1"   > <<뒤로가기 </a>
 </body>
 </html>
