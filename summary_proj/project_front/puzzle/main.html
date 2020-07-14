@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>그림 짝맞추기 게임</title>
+    <style>
+        h1 {text-align: center; color: rgb(121, 165, 248);}
+        #btn {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        button {
+            border: 1px solid rgb(121, 165, 248);
+            background-color: white;
+            color: rgb(121, 165, 248);
+            padding: 5px;
+        }
+        button:hover {
+            color: white;
+            background-color: rgb(121, 165, 248);
+        }
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+    <h1>그림 짝맞추기 게임</h1>
+    <hr>
+    <div id="group">
+        <button id="btn" onclick="location.href='pro01.html'">
+            <img src="img/k0.png"><br>그림 : 16개
+        </button>
+        <button id="btn" onclick="location.href='pro02.html'">
+            <img src="img/p0.png"><br>그림 : 36개
+        </button>
+    </div>
+</body>
+</html>

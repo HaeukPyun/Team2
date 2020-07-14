@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오톡 캐릭터 짝맞추기</title>
+    <style>
+        h2 {color: rgb(121, 165, 248);}
+        table{border:solid rgb(121, 165, 248); border-collapse: collapse;}
+        td {width: 100px; height: 100px;}
+        td:hover {background-color: rgb(121, 165, 248);}
+    </style>
+    <script src="http://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+<h2>카카오톡 캐릭터 짝맞추기</h2>
+<hr>
+<table id="puzzle" border="1" width="400" height="400">
+    <tr>
+        <td width="100"></td>
+        <td width="100"></td>
+        <td width="100"></td>
+        <td width="100"></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td>
+    </tr>
+</table>
+
+<script>
+    var cells = document.getElementById('puzzle').getElementsByTagName("td");
+    var timer = document.getElementById("timer");
+    var backImgArr = [];
+    var startSec = 0;
+    var endSec = 0;
+    var cnt=0;
+    
+    for(var i=0; i<cells.length; i++) {
+        backImgArr[i] = new Image(100,100)
+        backImgArr[i].src = 'k0.png';
+        cells[i].i = i;
+        cells[i].appendChild(backImgArr[i]);
+    }
+    var srcArr = ['k1.png','k2.png','k3.png','k4.png',
+        'k5.png','k6.png','k7.png','k8.png'];
+    
+    function init() {
+        for(var i=0; i<cells.length; ) {
+             var index = Math.floor(Math.random()*16);
+            if(cells[index].word == null) {
+                var idx = index%8;
+                cells[index].idx = idx;
+                cells[index].word = 'img/'+srcArr[i%8];
+                backImgArr[index].src= 'img/'+srcArr[i%8];
+                i++;
+            }
+        }
+        setTimeout(start, 3000);
+    }
+    
+    function start() {
+        startSec = Date.parse(new Date());
+        for(var i=0; i<cells.length; i++) {
+            backImgArr[i].src = 'img/k0.png';
+            cells[i].onclick = function() {
+                backImgArr[this.i].src = this.word;
+                compare(this);
+            };
+        }
+    }
+    
+    var firstCell = null;
+    function compare(cell) {
+        if(firstCell == null) {
+            firstCell = cell;
+        } else {
+            if(firstCell == cell) {
+                return;
+            }
+            if(firstCell.word == cell.word) {
+                firstCell.onclick = null;
+                cell.onclick = null;
+                firstCell = null;
+
+                cnt++;
+
+                if(cnt == 8) {
+                    endSec = Date.parse(new Date());
+                    alert((endSec - startSec)/1000 + "초 걸렸습니다.");
+                }
+            } else {
+                setTimeout(function () {
+                    backImgArr[firstCell.i].src = 'img/k0.png';
+                    backImgArr[cell.i].src = 'img/k0.png';
+                    firstCell = null;
+                }, 300);
+            }
+        }
+    }
+
+    init();
+</script>
+</body>
+</html>
