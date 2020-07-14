@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="../Team2/jquery-3.5.1.js"></script>
-    <script src="../Team2/underscore.js"></script>
-    <script src="../Team2/project/puzzle_main.html"></script>
-    <script src="../Team2/0713weather/weather.html"></script>
+    <script src="../Team2/underscore.js"></script>    
 
     <style>
         #loginId {
@@ -16,32 +14,42 @@
             font-size: xx-large;
             text-align: center;
         }
-    </style>
-
-
-    <link rel="import" href="../Team2/0713weather/weather.html">
+    </style> 
 
 
 </head>
 <img id="openImg" src="../media/DD.jpg" alt="">
 
 <body>
+    <!-- 
+        1.시작화면은 시계가 나오는 화면으로 시작.
+            1-1 시작화면 로고, 버튼, 배경사진 필요.
+
+        2.화면이 열리면 바탕화면과 아이콘이 등장.
+
+
+        3.시계는 실시간으로 변경
+        
+    
+
+     -->
     <section id="sectionId">
         <div id="divId">
             <p id="loginId">
 
-
+                
                 <script id="opneScriptId" tyep='text/javascript'> // user login                    
+
+                export function login(loginFn){
                     var result = confirm("계정확인, Kosmo_team #2");
                     var openMessage = "welcome userName";
                     var closeMessage = "not found userName";
-
-
+                    
 
                     if (result) {
                         confirm("확인완료");
                         document.write(openMessage);
-
+                        
 
 
 
@@ -72,7 +80,7 @@
                     };
 
                         // console.log("userpwdArr >> " + userpwdArr.pop()); // 삭제무방.
-
+                }
                 </script>
             </p>
         </div>
