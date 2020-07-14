@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <div>welcome userName</div>
+
+    <script> // user login
+        var result = confirm("계정확인, Kosmo_team #2");
+
+        if (result) {
+            confirm("확인완료");            
+        } else {
+            var userpwd = prompt("password 설정");
+            var userpwdArr = [];
+            userpwdArr.push(userpwd);
+            
+            var login = prompt("password 입력")
+            if (login == userpwdArr.pop()) {
+                confirm("확인완료");
+            }
+        }
+
+        console.log("userpwdArr >> " + userpwdArr.pop());
+
+    </script>
+
 </body>
+
 </html>
