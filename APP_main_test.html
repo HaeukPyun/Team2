@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../Team2/jquery-3.5.1.js"></script>
+    <script src="../Team2/underscore.js"></script>
+    <script src="../Team2/project/puzzle_main.html"></script>
+    <script src="../Team2/0713weather/weather.html"></script>
+
+    <style>
+        #loginId {
+            font-weight: bolder;
+            font-size: xx-large;
+            text-align: center;
+        }
+    </style>
+
+
+    <link rel="import" href="../Team2/0713weather/weather.html">
+
+
+</head>
+<img id="openImg" src="../media/DD.jpg" alt="">
+
+<body>
+    <section id="sectionId">
+        <div id="divId">
+            <p id="loginId">
+
+
+                <script id="opneScriptId" tyep='text/javascript'> // user login                    
+                    var result = confirm("계정확인, Kosmo_team #2");
+                    var openMessage = "welcome userName";
+                    var closeMessage = "not found userName";
+
+
+
+                    if (result) {
+                        confirm("확인완료");
+                        document.write(openMessage);
+
+
+
+
+                        //@import >> App실행화면
+
+
+
+                    } else {
+                        var userpwd = prompt("password 설정");
+                        var userpwdArr = [];
+                        userpwdArr.push(userpwd);
+
+                        var login = prompt("password 입력")
+                        if (login == userpwdArr.pop()) {
+                            confirm("확인완료");
+                            document.write(openMessage);
+
+
+                            //@import >> App실행화면
+
+
+
+                        } else {
+                            alert("password 불일치");
+                            document.write(closeMessage);
+
+                        };
+                    };
+
+                        // console.log("userpwdArr >> " + userpwdArr.pop()); // 삭제무방.
+
+                </script>
+            </p>
+        </div>
+    </section>
+    <hr>
+    @import >> App 실행화면
+</body>
+
+</html>
+</body>
+
+</html>

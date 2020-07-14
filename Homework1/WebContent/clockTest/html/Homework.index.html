@@ -6,55 +6,37 @@
     <title>시계&달력 종합 앱</title>
 </head>
 <style>
-    div{
-            border: 1px solid black;
-          overflow: hidden;
-            width: 608px;
-           float: left;
-           height: 100px;
-           text-align: center;
-           line-height: 100px;
-           margin: 0;
-           padding: 0;
-                      
-           }
+    div{border: 1px solid black;
+        overflow: hidden;
+        width: 608px;
+        float: left;
+        height: 100px;
+        text-align: center;
+        line-height: 100px;
+        margin: 0;
+        padding: 0;
+          }
            #box1,#box2,#box3,#box4{
            width: 150px;
-           background-color:whitesmoke
-
-               }
-       p{ color:green;
-
-       }
-       a{
-           color: blue;
-   
-       }
-       #box1:hover,#box2:hover,#box3:hover,#box4:hover{
+           background-color:whitesmoke 
+           }
+        #box1:hover,#box2:hover,#box3:hover,#box4:hover{
         background-color:gold;
         font-size: 30px;
         }
-        h1{
-          color: navy;
-        }
-       
-      </style>
+</style>
+
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script>
-// function Cal() {
-  //   var c1=prompt("달력을 보시겠습니까?(Y/N)");
-    // if(c1=="Y"){
-      //    alert("입장!")
-
-     //} else if(c1="Y"){
-           //alert("되돌아가기")
-     // }else{
-
-      //}
- //} 
+  $(function () {
+  $("p").css('color','green');
+  $("a").css('color','blue');
+  $('h1').css('color','navy');
+  $('#box0').css('box-shadow','5px 5px 5px lightgray');
+});
 
 </script>
 
