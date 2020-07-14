@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery-3.5.1.js"></script>
+    <style>
+    .body{
+        background-image: url("imgs/windowback.jpg");
+         background-size: 100%;
+         position: relative;
+    }
+    .tetris_icon{
+        width: 50px;
+        height: 50px;
+    }
+     #iframe{
+          display:none;  
+          position: absolute;
+            }
+
+
+    </style>
+</head>
+
+<body class="body">
+    ../js-tetris-master\js-tetris-master/index.html
+     <a href="../html/Homework index.html" target='iframe'>
+     <img src='../window_test/imgs/Ticon.png' class='tetris_icon' name='icon'> 
+     </a>
+      <br>
+   <!-- <a href="http://tcpschool.com/" target='iframe'>-->
+    <img src='../window_test/imgs/chromeicon.png' class='internet_icon'> 
+    </a>
+
+  <iframe name='iframe' id="iframe" width="900px" height="900px"></iframe>
+  
+  <script> 
+  
+        $(document).ready(function(){
+            $('.tetris_icon').dblclick(function(){
+                $('#iframe').css('display','inline');
+                $('#iframe').css('backgroundColor','cornsilk');
+            }); // 테트리스 더블클릭 창 실행
+
+            $('.internet_icon').dblclick(function(){
+                $('#iframe').css('display','inline');
+            }); //인터넷 크롬창
+                    });
+
+                  //esc 누르면 iframe 닫히게 만들기
+                    
+     
+    </script>
+
+</body>
+
+</html>

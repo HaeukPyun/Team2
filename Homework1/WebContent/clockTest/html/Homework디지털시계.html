@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            color: navy;
+        }
+        #nowTimes{
+            color: royalblue;
+        }
+        #T1{
+           
+            width: 500px;
+            
+            font-size: 30px;
+        }
+        #T1:hover{
+            border: 3px double yellow;
+            background-color: black;
+            color: white;
+        }
+        #nowTimes:hover{
+            color: whitesmoke;
+        }
+        #back1{
+    color: dodgerblue;
+      }
+    </style>
+    <script type="text/javascript">
+
+        document.addEventListener("DOMContentLoaded", function() {
+                realTimer();
+    setInterval(realTimer, 600);});
+    function addZ(num) {
+        if(num < 10) { num = "0" + num; }
+               return num;
+       }
+           function realTimer() {
+    
+            const nowDate = new Date();
+    
+            const year = nowDate.getFullYear();
+    
+            const month= nowDate.getMonth() + 1;
+    
+            const date = nowDate.getDate();
+    
+            const hour = nowDate.getHours();
+    
+            const min = nowDate.getMinutes();
+    
+            const sec = nowDate.getSeconds();
+    
+            document.getElementById("nowTimes").innerHTML = 
+         year + "년" + addZ(month) + "월" + addZ(date) +"일"+ " " + hour + ":" + addZ(min) 
+         + ":" + addZ(sec);
+         
+    }
+             
+    </script>
+    <body>
+        <h1> 디지털 시계</h1>
+    <div id="T1"> 현재시간 : <span id="nowTimes" ></span></div>
+    <a href="Homework.index.html" id="back1"   >뒤로가기</a>
+    </body>
+    </html>
+    

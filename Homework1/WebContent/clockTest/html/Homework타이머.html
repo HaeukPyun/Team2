@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+	*{
+		margin: 0px;
+		padding: 0px;
+	}
+  	body{
+      position: absolute;
+      top: 50px;
+      left: 250px;
+	
+ 	}
+ 	.box{
+		width: 200px;
+		height: 200px;
+	}
+	.timerBox{
+		width: 200px;
+		outline: 2px solid black;
+	}
+	.timerBox .time{
+		font-size: 30pt;
+		color: dodgerblue;
+		text-align: center;
+		font-family: sans-serif;
+	}
+	.btnBox{
+		margin: 20px auto;
+		text-align: center;
+	}
+	.btnBox .fa{
+		margin: 0px 5px;
+		font-size: 30pt;
+		color: black
+	
+	}
+  #back1{
+    color: dodgerblue;
+      }
+</style>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+var time = 0;
+var starFlag = true;
+$(document).ready(function(){
+  buttonEvt();
+});
+
+function init(){
+  document.getElementById("time").innerHTML = "00:00:00";
+}
+
+function buttonEvt(){
+  var hour = 0;
+  var min = 0;
+  var sec = 0;
+  var timer;
+
+  // start btn
+  $("#startbtn").click(function(){
+
+    if(starFlag){
+      $(".fa").css("color","black")
+      this.style.color = "blue";
+      starFlag = false;
+
+      if(time == 0){
+        init();
+      }
+
+      timer = setInterval(function(){
+        time++;
+
+        min = Math.floor(time/60);
+        hour = Math.floor(min/60);
+        sec = time%60;
+        min = min%60;
+
+        var th = hour;
+        var tm = min;
+        var ts = sec;
+        if(th<10){
+        th ="0" + hour;
+        }
+        if(tm < 10){
+        tm ="0" + min;
+        }
+        if(ts < 10){
+        ts ="0" + sec;
+        }
+
+        document.getElementById("time").innerHTML = th + ":" + tm + ":" + ts;
+      }, 1000);
+    }
+  });
+
+  // pause btn
+  $("#pausebtn").click(function(){
+    if(time != 0){
+      $(".fa").css("color","black")
+      this.style.color = "yellow";
+      //this.style.backgroundColor="black";
+      clearInterval(timer);
+      starFlag = true;
+    }
+  });
+
+  // stop btn
+  $("#stopbtn").click(function(){
+    if(time != 0){
+      $(".fa").css("color","black")
+      this.style.color = "red";
+             
+      clearInterval(timer);
+      starFlag = true;
+      time = 0;
+      init();
+    }
+  });
+}
+
+
+
+</script>
+<body>
+    <div id='box' class="box">
+        <div id='timerBox' class="timerBox">
+            <div id="time" class="time">00:00:00</div>
+        </div>
+        <div class="btnBox">
+            <i id="startbtn" class="fa fa-play" aria-hidden="true"></i>
+            <i id="pausebtn" class="fa fa-pause" aria-hidden="true"></i>
+            <i id="stopbtn" class="fa fa-stop" aria-hidden="true"></i>
+        </div>
+    </div>
+ <a href="Homework.index.html" id="back1"   >뒤로가기</a>
+   
+</body>
+</html>
