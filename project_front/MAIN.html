@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윈도우10</title>
+    <link rel="stylesheet" type='text/css' href="css/style.css">
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="js/move.js"> </script>
+    <script src='js/script.js'> </script>
+</head>
+
+<body id='body'>
+    <!-- <a href="Tetris/index.html" target='iframe'>
+        <img src='imgs/Ticon.png' class='iconStarter'>
+    </a><br> -->
+    <img src='imgs/chromeicon.png' id='chrome_icon'> 
+
+    <iframe name='iframe' id="iframe" width="1200px" height="900px"></iframe>
+    <iframe src='WindowFrame/windowframe.html' name='window_frame' 
+        id="window_frame" width="500px" height="500px" ></iframe>
+
+    <footer id="footer">
+        <div id='clock' name='clock'></div>
+        <textarea name="textarea" id="textarea" cols="46" rows="2" placeholder="검색하려면 여기에 입력하십시오."></textarea>
+    </footer>
+</body>
+
+<!-- if there are many iframes, then there should be an array for them -->
+<script>
+    this.smallIconHandler=function(src,dest){
+        for(var elem of this.document.body.children){
+            if(elem.id==dest){
+                $(('#'+elem.id)).attr('src',src)
+                $(('#'+elem.id)).css('display','inline');
+                $(('#'+elem.id)).css('backgroundColor','cornsilk');
+            }
+        }
+    }
+</script>
+<!-- jh.js must come at the end of body -->
+<script src='js/jh.js'></script>
+<!-- iconStarters.js must come after jh.js -->
+<script src='js/iconStarters.js'></script>
+</html>

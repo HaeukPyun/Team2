@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>날씨</title>
+</head>
+<style>
+   
+    #select{
+        font-size: 20px;
+       
+    }
+
+    #div{
+        height: 1024px;
+        background: no-repeat center center fixed; 
+        -webkit-background-size: cover;
+         -moz-background-size: cover;
+          -o-background-size: cover;
+         background-size: cover; 
+    }
+
+    p{
+        color: ivory;
+        font-size: 20px;
+        text-align: center;
+        text-shadow: 3px 3px black;
+    }
+    #showWeather > p {
+        font-size: 50px;
+    }
+    #icon{
+        width: 70px;
+        height: 70px;
+    }
+</style>
+<script src="http://code.jquery.com/jquery.js"></script>
+
+<body>
+    <div id="select">도시 검색:<input type="text" id="search" value="구로구" onkeyup="enterKey()" >
+    <input type="button" value="검색" onclick="change()"></div>
+    <div id="div" >
+        <!--<figure id="icon"></figure>-->
+              
+    <p id="showWeather">
+        
+    </p>
+    
+    
+    </div>
+</body>
+
+<script>
+    
+    $(document).ready(function(){
+    change();
+    });
+
+    function change(){
+
+    var search =document.getElementById('search').value;
+     var apiURI = "http://api.openweathermap.org/data/2.5/weather?q="+search+"&appid="+"a8ba366aebf97012271f5c1466456715"+"&lang=kr";
+    //var apiURI = "http://api.openweathermap.org/data/2.5/weather?q="+"London"+"&appid="+"a8ba366aebf97012271f5c1466456715";
+
+        //console.log("dfdfdf=> "+search);
+    $.ajax({
+            url: apiURI,
+            dataType: "json",
+            type: "GET",
+            async: "false",
+            success: function(resp) {
+                console.log(resp);
+                console.log("현재온도 : "+ (resp.main.temp- 273.15) );
+                console.log("현재습도 : "+ resp.main.humidity);
+                console.log("날씨 : "+ resp.weather[0].main );
+                console.log("상세날씨설명 : "+ resp.weather[0].description );
+                console.log("날씨 이미지 : "+ resp.weather[0].icon );
+                console.log("바람   : "+ resp.wind.speed );
+                console.log("나라   : "+ resp.sys.country );
+                console.log("도시이름  : "+ resp.name );
+                console.log("구름  : "+ (resp.clouds.all) +"%" );
+                
+                var wf='';
+                var wf2 ='';
+                wf += '<p><b>' + resp.sys.country+ ", "+resp.name + '</p></b>' +
+                '<p><b>' +"현재온도: "+ String(Math.floor(resp.main.temp- 273.15))  + '°C , ' +resp.weather[0].description + '<img id="icon"></p></b>' ;
+                wf += " 체감온도: " +String(Math.floor(resp.main.feels_like- 273.15))  + '°C ';
+                wf += "최저온도: " + String(Math.floor(resp.main.temp_min- 273.15)) + '°C ';
+                wf += "최고온도: " + String(Math.floor(resp.main.temp_max- 273.15)) + '°C ';
+                wf +="구름: " + resp.clouds.all +"%" + " 습도: " + resp.main.humidity + " 바람: " + resp.wind.speed + "m/s"; 
+                $("#showWeather").html(wf);
+
+               image(resp.weather[0].main);
+                var imgURL = "http://openweathermap.org/img/w/" + resp.weather[0].icon + ".png";
+                $("#icon").attr("src",imgURL);
+            }
+            
+            })
+            .fail(function(){
+                
+                alert("해당 도시가 없습니다 다시입력해 주세요");
+        
+            });
+        }    
+        
+        function image(weather){
+            if(weather=='Rain'){
+                $("#div").attr("style","background-image: url('../imgs/rain.png')");
+            }else if(weather == 'Mist'){
+                $("#div").attr("style","background-image: url('../imgs/mist.png')");
+            }else if(weather == 'Clear'){
+                $("#div").attr("style","background-image: url('../imgs/clear.png')");
+            }else if(weather == 'Clouds'){
+                $("#div").attr("style","background-image: url('../imgs/clouds.png')");
+            }else if(weather == 'Scatter cloud'){
+                $("#div").attr("style","background-image: url('../imgs/scattercloud.png')");
+            }else if(weather == 'Snow'){
+                $("#div").attr("style","background-image: url('../imgs/snow.png')");
+            }
+        }
+        function enterKey(){
+            if(window.event.keyCode == 13){
+                change();
+            }
+        }
+        
+</script>
+</html>

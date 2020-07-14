@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>시계&달력 종합 앱</title>
 </head>
 <style>
     div{
@@ -30,37 +30,17 @@
            color: blue;
    
        }
-       #box1:hover{
+       #box1:hover,#box2:hover,#box3:hover,#box4:hover{
         background-color:gold;
         font-size: 30px;
-       
-        
-       }
-       #box2:hover{
-        background-color:gold;
-        font-size: 30px;
-       
-        
-       }
-       #box3:hover{
-            background-color:gold;
-            font-size: 30px;
-           
-            }
-       #box4:hover{
-        background-color:gold;
-        font-size: 30px;
-     
-       }
-
-
-
-
-
-
-
-
-</style>
+        }
+        h1{
+          color: navy;
+        }
+     #box0{
+          box-shadow: 5px 5px 5px lightgray;
+        }
+      </style>
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -82,16 +62,16 @@
 
 <body>
     
-    <h1 id="t1">알람 &시계&달력 종합 앱</h1>
-                   <div id="box0">
-                       <div id="box1">  <p class="far fa-clock " > <a href="Homework디지털시계.html"> 디지털시계</p>       </a> </div> 
-                       <div id="box2">  <p class="fas fa-clock "> <a href="Homework아날로그시계.html"> 아날로그시계</p>       </a> </div>     
-                        <div id="box3">   <p class="far fa-bell">  <a href="Homework타이머.html" >  타이머</a>   </p></div>
+    <h1 id="t1">시계&달력 종합 앱</h1>
+    <div id="box0">
+   <div id="box1">  <p class="far fa-clock " > <a href="Homework디지털시계.html"> 디지털시계</p>       </a> </div> 
+   <div id="box2">  <p class="fas fa-clock "> <a href="Homework아날로그시계.html"> 아날로그시계</p>       </a> </div>     
+   <div id="box3">   <p class="far fa-bell">  <a href="Homework스톱워치.html" >  스톱워치</a>   </p></div>
                         <!--<div class="box4">   <p class="fa fa-refresh -fw"> <a href="Homework.alram.html"></a></p></div>-->
-                       <div  id="box4" onclick="Cal" > <p class="far fa-calendar"> <a href="Homework.달력.html"> 달력   </a></p>></div>
-                    
+   <div  id="box4" onclick="Cal" > <p class="far fa-calendar"> <a href="Homework.달력.html"> 달력   </a></p>></div>
+  </div>                 
 
                       
-                         </div> 
+                        
 </body>
 </html>

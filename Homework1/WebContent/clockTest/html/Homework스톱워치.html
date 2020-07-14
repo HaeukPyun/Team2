@@ -3,17 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>스톱워치</title>
 </head>
 <style>
+h1{
+  color: navy;
+}
+   #power1{
+        border: 2px double slategray;
+        width: 400px;
+        font-size: 29px;
+      
+      }
+      .a1{
+      font-size: 20px;
+      }
+      #ppp{
+        font-size: 40px;
+      font-weight: bold;
+      }
+  fieldset{
+    border: 1px double navy;
+    height: 130px;
+  }
 	*{
 		margin: 0px;
 		padding: 0px;
 	}
   	body{
       position: absolute;
-      top: 50px;
-      left: 250px;
+      top: 30px;
+      left: 80px;
 	
  	}
  	.box{
@@ -42,6 +62,7 @@
 	}
   #back1{
     color: dodgerblue;
+    font-size: 20px;
       }
 </style>
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -130,17 +151,33 @@ function buttonEvt(){
 
 </script>
 <body>
+<h1>스톱워치</h1>
+   <form >
+  <fieldset >
     <div id='box' class="box">
-        <div id='timerBox' class="timerBox">
-            <div id="time" class="time">00:00:00</div>
-        </div>
-        <div class="btnBox">
-            <i id="startbtn" class="fa fa-play" aria-hidden="true"></i>
-            <i id="pausebtn" class="fa fa-pause" aria-hidden="true"></i>
-            <i id="stopbtn" class="fa fa-stop" aria-hidden="true"></i>
-        </div>
-    </div>
- <a href="Homework.index.html" id="back1"   >뒤로가기</a>
+      <div id='timerBox' class="timerBox">
+          <div id="time" class="time">00:00:00</div>
+      </div>
+      <div class="btnBox">
+          <i id="startbtn" class="fa fa-play" aria-hidden="true"></i>
+          <i id="pausebtn" class="fa fa-pause" aria-hidden="true"></i>
+          <i id="stopbtn" class="fa fa-stop" aria-hidden="true"></i>
+      </div>
+  </div>
+  </fieldset>
+   </form>
+
+
+   <form id="power1">
+            
+    <fieldset>
+     <legend> 현재시간(설정)</legend>
+<p class="a1">date:<input  class="q" type="date"><br> </p> 
+<p class="a1">time:<input class="q" type="time"><br></p>
+<p class="a1">local:<input class="q"  type="datetime-local"><br> </p>
+    </fieldset>
+  </form>
+ <a href="Homework.index.html" id="back1"   > <<뒤로가기</a>
    
 </body>
 </html>

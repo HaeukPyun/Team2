@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #img{
+            width: 95%;  
+        }
+        #z_key_img{
+            width:95%;
+            position:absolute;
+        }
+        #weather_icon {
+            width: 73px;
+            height: 73px;
+            position: relative;
+            left: 391px;
+            top: 111px;
+            padding: 0;
+            margin: 0;
+            border: none; 
+            background-size: 100%;
+        }
+    </style>
+</head>
+<body>
+    <img src="../imgs/z_key.png" id='z_key_img'>
+    <img src="../imgs/weatherSmallIcon.png" id='weather_icon'>
+</body>
+<script>
+    weatherIcon=document.getElementById('weather_icon');
+    weatherIcon.onclick=function(){
+        // window.parent.smallIconHandler('../Weather/weather.html','iframe');
+        // need to enter src path in MAIN.html's view
+        window.parent.smallIconHandler('Weather/weather.html','iframe');
+    }
+</script>
+</html>
