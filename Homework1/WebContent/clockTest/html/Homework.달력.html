@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    table{
+        border-radius: 30px;
+        width: 600px;
+        height: 500px;
+    }
+        td{
+            text-align: center;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 25px;
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+            border: 2px solid green;
+            border-radius: 10px;
+        }
+        #sunday{
+            color: orangered;
+           
+        }
+        #saturday{
+            color: dodgerblue;
+        }
+        #back1{
+    color: dodgerblue;
+ 
+      }
+
+</style>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+    
+        var today = new Date();//오늘 날짜//내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
+        var date = new Date();
+        function prevCalendar() {//이전달
+            today=new Date(today.getFullYear(),today.getMonth()-1,today.getDate());
+            buildCalendar();
+        }
+
+      function nextCalendar() {// 다음달
+          today=new Date(today.getFullYear(),today.getMonth()+1,today.getDate());
+          buildCalendar();
+      }
+      function buildCalendar(){//현재 달 달력 만들기
+            var doMonth = new Date(today.getFullYear(),today.getMonth(),1);
+            var lastDate = new Date(today.getFullYear(),today.getMonth()+1,0);
+            var tbCalendar = document.getElementById("calendar");
+            var tbCalendarYM = document.getElementById("tbCalendarYM");
+           // tbCalendarYM.innerHTML = today.getFullYear() + "년 " + (today.getMonth() + 1) + "월"; 
+            tbCalendarYM.innerHTML=today.getFullYear()+"년"+(today.getMonth()+1)+"월";
+                /*while은 이번달이 끝나면 다음달로 넘겨주는 역할*/
+            while (tbCalendar.rows.length > 2) {
+                 tbCalendar.deleteRow(tbCalendar.rows.length-1);
+             }
+             var row = null;
+             row = tbCalendar.insertRow();
+             //테이블에 새로운 열 삽입//즉, 초기화
+             var cnt = 0;
+            // 1일이 시작되는 칸을 맞추어 줌
+            for(i=0;i<doMonth.getDay();i++){
+                cell=row.insertCell();
+                cnt=cnt+1;
+            }
+            for (i=1; i<=lastDate.getDate(); i++) { 
+                  cell = row.insertCell();
+                  cell.innerHTML = i;
+                  cnt = cnt + 1;
+              if (cnt % 7 == 1) {/*일요일 계산*/
+                         }    
+             if (cnt%7 == 0){/* 1주일이 7일 이므로 토요일 구하기*/
+                    row = calendar.insertRow();
+                   }
+                   if (today.getFullYear() == date.getFullYear()
+                       && today.getMonth() == date.getMonth()
+                         && i == date.getDate()) {
+                  //달력에 있는 년,달과 내 컴퓨터의 로컬 년,달이 같고, 일이 오늘의 일과 같으면
+                cell.bgColor = "gold";//셀의 배경색을 노랑으로 
+               
+               }
+             }
+
+      }
+
+    
+    
+    
+</script>
+<body>
+    <p></p>
+   <h3> ★2020년 달력☆</h3>
+<table id="calendar" border="2" align="center" style="border-color: navy;">
+
+    <tr>
+        <td> <label onclick="prevCalendar()"> <-이전달</label>     </td>
+        <td  align="center" id="tbCalendarYM" colspan="5" >yyyy년 m월</td>
+        <td> <label onclick="nextCalendar()">다음달-> </label> </td>
+        
+    </tr>
+    <tr>
+        <td id="sunday">일</td>
+        <td>월</td>
+        <td>화</td>
+        <td>수</td>
+        <td>목</td>
+        <td>금</td>
+        <td id="saturday">토</td>
+    </tr>
+</table>
+<a href="Homework.index.html" id="back1"   >뒤로가기</a>
+<script type="text/javascript" language='text/javascript'>
+      buildCalendar();
+    
+</script>
+</body>
+</html>
