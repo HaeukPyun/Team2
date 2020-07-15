@@ -25,6 +25,21 @@
 .icon>div>a{
     margin: 10px;
 }
+.icon:hover{
+    border: 2px #E0E0E0 solid;
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+}
+.icon:active {
+    border: 3px black dotted;
+}
+
+.iconfocus {
+    border: 2px #E0E0E0 solid;
+}
 #iframe{
     display:none; 
     position: absolute;
@@ -76,6 +91,13 @@
     width: 80px;
     height: 80px;
     display: inline-block;
+
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transition: all 0.5s ease-in-out;
 }
 
 .icon>div {
