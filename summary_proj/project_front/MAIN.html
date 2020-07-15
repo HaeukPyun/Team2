@@ -17,6 +17,11 @@
             background-repeat: repeat;
             background-size: cover;
         }
+        #T1 {
+            text-align: right;
+            margin-right: 20px;
+            color: aliceblue;            
+        }
     </style>
 </head>
 
@@ -65,16 +70,25 @@
 
 
 
-    <img src='imgs/wikipediaIcon.png' id='chrome_icon' width="77" height="77">
+    <img src='imgs/wikipediaIcon.png' id='chrome_icon' width="77" height="77">  
 
-    <script src="../project_front/MAIN.html"></script>
-
+    <a href="javascript:load(internet_address)"></script>
     <iframe name='iframe' id="iframe" width="1200px" height="900px"></iframe>
     <iframe src='WindowFrame/windowframe.html' name='window_frame' id="window_frame" width="500px"
         height="500px"></iframe>
 
     <footer id="footer">
-        <div id='clock' name='clock'></div>
+
+        <!-- <div id='clock' name='clock'></div> -->
+        <!-- 수정부분 -->
+         <script type="text/javascript" src="../project_front/js/clock.js"></script>
+         <div id="T1">
+             <span id="nowTimes"></span><br>
+             <span id="nowTimes2"></span>
+         </div>
+         <a href="Homework.index.html" id="back1"></a>
+
+
         <textarea name="textarea" id="textarea" cols="46" rows="2" placeholder="검색하려면 여기에 입력하십시오."></textarea>
     </footer>
 </body>
