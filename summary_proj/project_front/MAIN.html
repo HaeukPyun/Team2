@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>윈도우10</title>
     <link rel="stylesheet" type='text/css' href="css/style.css">
     <script src="js/jquery-3.5.1.js"></script>
@@ -11,7 +12,7 @@
     <script src='js/script.js'> </script>
 
     <style>
-        #body{
+        #body {
             background-image: url('../project_front/imgs/clear.png');
             background-repeat: repeat;
             background-size: cover;
@@ -24,11 +25,53 @@
         <img src='imgs/Ticon.png' class='iconStarter'>
     </a><br> -->
 
-    <img src='imgs/wikipediaIcon.png' id='chrome_icon' width="77" height="77"> 
+    <script>
+        var result = confirm("계정확인, Kosmo_team #2");
+
+        function openMessage() {
+            return "welcome userName";
+        }
+
+        function closeMessage() {
+            return "not found userName";
+        }
+
+
+        if (result) {
+            confirm("확인완료");
+            openMessage();
+        } else {
+            while (!result) {
+                var userpwd = prompt("password 설정");
+                var userpwdArr = [];
+                userpwdArr.push(userpwd);
+
+                var login = prompt("password 입력")
+                if (login == userpwdArr.pop()) {
+                    confirm("확인완료");
+                    openMessage();
+
+                } else {
+                    alert("password 불일치");
+                    closeMessage();
+                    continue;
+                }
+                break;
+            }
+        }
+    </script>
+
+
+
+
+
+    <img src='imgs/wikipediaIcon.png' id='chrome_icon' width="77" height="77">
+
     <script src="../project_front/MAIN.html"></script>
+
     <iframe name='iframe' id="iframe" width="1200px" height="900px"></iframe>
-    <iframe src='WindowFrame/windowframe.html' name='window_frame' 
-        id="window_frame" width="500px" height="500px" ></iframe>
+    <iframe src='WindowFrame/windowframe.html' name='window_frame' id="window_frame" width="500px"
+        height="500px"></iframe>
 
     <footer id="footer">
         <div id='clock' name='clock'></div>
@@ -36,14 +79,17 @@
     </footer>
 </body>
 
+
+
+
 <!-- if there are many iframes, then there should be an array for them -->
 <script>
-    this.smallIconHandler=function(src,dest){
-        for(var elem of this.document.body.children){
-            if(elem.id==dest){
-                $(('#'+elem.id)).attr('src',src)
-                $(('#'+elem.id)).css('display','inline');
-                $(('#'+elem.id)).css('backgroundColor','cornsilk');
+    this.smallIconHandler = function (src, dest) {
+        for (var elem of this.document.body.children) {
+            if (elem.id == dest) {
+                $(('#' + elem.id)).attr('src', src)
+                $(('#' + elem.id)).css('display', 'inline');
+                $(('#' + elem.id)).css('backgroundColor', 'cornsilk');
             }
         }
     }
@@ -52,5 +98,5 @@
 <script src='js/jh.js'></script>
 <!-- iconStarters.js must come after jh.js -->
 <script src='js/iconStarters.js'></script>
-</html>
 
+</html>
