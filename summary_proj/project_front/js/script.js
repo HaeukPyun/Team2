@@ -19,23 +19,16 @@ $(document).ready(function(){
     }); //z 누르면 windowframe 나오고 esc누르면 사라지기
         
     $('#chrome_icon').click(function(){
-        var internet_address = prompt('인터넷주소 입력[★http://는 빼고 입력해주세요.]');
+        var internet_address = prompt("[http:// 이후를 입력해주세요.]");
         $('#iframe').css('display','inline');
         iframe.location.href='http://'+internet_address;
-    }); //인터넷창
- 
-    let clock = new Date();
-    let hours = clock.getHours();
-    if(hours>=12){
-        hours='오후'+(hours-12);
-    }else if(hours<12){
-        hours='오전'+(hours);
-    }
-    let minutes = clock.getMinutes()+'<br>'; 
-    let year = clock.getFullYear();
-    let month=clock.getMonth()+1;
-    let day = clock.getDate();
-    document.getElementById('clock').innerHTML=hours+':'+minutes+(year+'-'+month+'-'+day);
+    }); //인터넷창       
+
+
+    /////////////////////////////////////////////////////////////
+    // 시간 부분 수정함.
+    /////////////////////////////////////////////////////////////
+    
 
     $('#textarea').keyup(function(){
         console.log(this.value());
