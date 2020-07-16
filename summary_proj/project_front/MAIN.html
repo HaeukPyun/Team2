@@ -97,17 +97,6 @@
 
 
 <!-- if there are many iframes, then there should be an array for them -->
-<script>
-    this.smallIconHandler = function (src, dest) {
-        for (var elem of this.document.body.children) {
-            if (elem.id == dest) {
-                $(('#' + elem.id)).attr('src', src)
-                $(('#' + elem.id)).css('display', 'inline');
-                $(('#' + elem.id)).css('backgroundColor', 'cornsilk');
-            }
-        }
-    }
-</script>
 <!-- jh.js must come at the end of body -->
 <script src='js/jh.js'></script>
 <!-- iconStarters.js must come after jh.js -->
