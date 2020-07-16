@@ -1,18 +1,21 @@
-var eventHolding;
-var bd = document.getElementById('body');
-bd.onclick = function () {
-    // optionMenu.style.display='none';
-    var om = document.getElementById('optionMenu');
-    if (om != null) om.parentNode.remove();
+/////////////////////////////////////////////////////////////////////////////
+// to handle the small icon execution in the bottom pad
+this.smallIconHandler=function(src,dest){
+    for(var elem of this.document.body.children){
+        if(elem.id==dest){
+            $(('#'+elem.id)).attr('src',src)
+            $(('#'+elem.id)).css('display','inline');
+            $(('#'+elem.id)).css('backgroundColor','cornsilk');
+        }
+    }
 }
-bd.onauxclick = rightClick;
-bd.ondragover = preventD;
-bd.ondrop = drop;
-bd.oncontextmenu = function () { return false }
 
-var iconMap = {};
-var folderMap = {};
-var folderTree = {};
+/////////////////////////////////////////////////////////////////////////////
+// global variables
+var iconMap = {}; // hashTable for an element ID (key) and its actual DOM (value)
+var folderMap = {}; // each key(folder ID) has an array containing children DOM
+var folderTree = {}; // indicates the parent ID
+
 folderMap['body'] = []
 var folderNumber = 1;
 var zIndices = [0];
@@ -22,52 +25,76 @@ var folderPositionIntervalX = 200;
 var folderPositionIntervalY = 150;
 var nextNewFolderPositionX = 150;
 var nextNewFolderPositionY = 100;
+var whereRightClicked;
+var bd = document.getElementById('body');
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// body tag event registration
+bd.onclick = function () {
+    // optionMenu.style.display='none';
+    var om = document.getElementById('optionMenu');
+    if (om != null) om.parentNode.remove();
+}
+bd.onauxclick = rightClick;
+bd.ondragover = preventD;
+bd.ondrop = drop;
+bd.oncontextmenu = function () { return false }
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// major functions concerning drag events
 function preventD(e) {
     e.preventDefault();
 }
 function dragStart(e) {
-    if(e.target.className.includes('iconStarter')) e.dataTransfer.setData('id', e.target.parentNode.parentNode.parentNode.id);
-    else e.dataTransfer.setData('id', e.target.id);
+    e.dataTransfer.setData('id',e.currentTarget.id)
+    // if(e.target.className.includes('iconStarter')) e.dataTransfer.setData('id', e.target.parentNode.parentNode.parentNode.id);
+    // else e.dataTransfer.setData('id', e.target.id);
 }
-// if tg is body, left,top update
-
 function drop(e) {
     e.preventDefault();
     e.stopPropagation();
-    var id = e.dataTransfer.getData('id');
-    var grabbed = document.getElementById(id);
+    var idForDragged = e.dataTransfer.getData('id');
+    var grabbed = document.getElementById(idForDragged);
+    // parentOfGrabbed is needed to remove grabbed
     var parentOfGrabbed = grabbed.parentNode;
     if (grabbed.className.includes('folder')) grabbedIsFolder = true;
     else grabbedIsFolder = false;
 
-    var tg;
-    if (e.target.className.includes('openFolder')) tg = e.target;
-    else if (e.target.id == 'body') tg = e.target;
-    else tg = e.target.parentNode;
+    var tg=this;
+    // if (e.target.className.includes('openFolder')) tg = e.target;
+    // else if (e.target.id == 'body') tg = e.target;
+    // else tg = e.target.parentNode;
 
 
-    /////////////////////////////////////////////////////////////////
-    // when a folder is dropped to itself
-    // when a folder is dropped to its open folder
-    // when a folder in an open folder is dropped to the same folder icon outside
-    // when a folder with a parent is dropped to one of his ancestors.
-    if (tg.id == id || tg.connectedFolderId == id || tg.id == parentOfGrabbed.connectedFolderId) return;
+    /////////////////////////////////////////////////////////////////////////
+    // 4 cautious cases for folder drag
+    /////////////////////////////////////////////////////////////////////////
+    // - when a folder is dropped to itself
+    // - when a folder is dropped to its open folder
+    // - when a folder in an open folder is dropped to the same folder icon outside
+    // - when a folder with a parent is dropped to one of his ancestors.
+    if (tg.id == idForDragged || tg.connectedFolderId == idForDragged || tg.id == parentOfGrabbed.connectedFolderId) return;
 
     var pId;
     if (tg.connectedFolderId != null) pId = tg.connectedFolderId;
     else pId = tg.id;
     while (folderTree[pId] != undefined) {
         pId = folderTree[pId];
-        if (id == pId) {
+        if (idForDragged == pId) {
             alert('대상폴더가 원본폴더의 하위폴더입니다');
             return;
         }
     }
-    /////////////////////////////////////////////////////////////////
-    // getElementsByClassName returns NodeList, not HTMLCollection
-    // need to convert nodelist into array form to use filter and such functions
-    /////////////////////////////////////////////////////////////////
 
+    /////////////////////////////////////////////////////////////////////////
+    // removal of the element dragged in from folderMap and in the parent DOM
+    // and change in folderTree
+    /////////////////////////////////////////////////////////////////////////
+    
     parentOfGrabbed.removeChild(parentOfGrabbed.children[Array.from(parentOfGrabbed.children).indexOf(grabbed)]);
     if(grabbedIsFolder){
         if (parentOfGrabbed.className.includes('openFolder')) {
@@ -75,14 +102,23 @@ function drop(e) {
         }
         else folderMap[parentOfGrabbed.id].splice(folderMap[parentOfGrabbed.id].indexOf(grabbed), 1)
     }
-    else folderMap[folderTree[id]].splice(folderMap[folderTree[id]].indexOf(grabbed), 1);
+    else folderMap[folderTree[idForDragged]].splice(folderMap[folderTree[id]].indexOf(grabbed), 1);
+    /////////////////////////////////////////////////////////////////////////
     
+    /////////////////////////////////////////////////////////////////////////
+    // addition of the dragged element into the destination DOM and folderMap
+    // and change in folderTree
+    /////////////////////////////////////////////////////////////////////////
     if (tg.className.includes('folder')) {
         folderMap[tg.id].push(grabbed);
-        folderTree[id] = tg.id;
+        folderTree[idForDragged] = tg.id;
         if (tg.isOpen == 1) {
             var openFolders = document.getElementsByClassName('openFolder');
             openFolders = Array.prototype.slice.call(openFolders);
+    /////////////////////////////////////////////////////////////////////////
+    // getElementsByClassName returns NodeList, not HTMLCollection
+    // need to convert nodelist into array form to use filter and such functions
+    /////////////////////////////////////////////////////////////////////////
             var tgOpenFolder = openFolders.filter(function (elem) {
                 if (elem.connectedFolderId == tg.id) return true;
             })[0];
@@ -91,15 +127,17 @@ function drop(e) {
     }
     else if (tg.className.includes('openFolder')) {
         folderMap[tg.connectedFolderId].push(grabbed);
-        folderTree[id] = tg.connectedFolderId;
+        folderTree[idForDragged] = tg.connectedFolderId;
         tg.appendChild(grabbed);
     }
     else {
         folderMap[tg.id].push(grabbed);
-        folderTree[id] = tg.id;
+        folderTree[idForDragged] = tg.id;
         tg.appendChild(grabbed);
     }
 }
+/////////////////////////////////////////////////////////////////////////////
+
 
 function newFolderWindow(fid) {
     var nf = document.createElement('div');
@@ -107,6 +145,9 @@ function newFolderWindow(fid) {
     // nf.draggable = true;
     nf.ondragover = preventD;
     nf.ondrop = drop;
+    // nf.addEventListener('drop',function(e){
+    //     console.dir(this);
+    // })
     nf.connectedFolderId = fid;
     nf.onauxclick = rightClick;
 
@@ -138,10 +179,12 @@ function newFolderWindow(fid) {
 
     bd.appendChild(nf);
     exitBtn.onclick = function () {
-        this.parentNode.parentNode.remove();
+        // var currZ=this.parentNode.parentNode.style.zIndex;
+        var currZ=nf.style.zIndex;
+        // this.parentNode.parentNode.remove();
+        nf.remove();
         // document.getElementById(fid).isOpen = 0;
         iconMap[fid].isOpen = 0;
-        var currZ=this.parentNode.parentNode.style.zIndex;
         zIndices=zIndices.filter(function(elem){
             if(elem==currZ) return false;
             else return true;
@@ -151,12 +194,11 @@ function newFolderWindow(fid) {
 }
 
 function folderDblclick(e) {
-    var tg = e.target.parentNode;
-    if (tg.isOpen == 1) return;
-    tg.isOpen = 1;
-    var nf = newFolderWindow(tg.id);
-    if (tg.id in folderMap) {
-        for (var edom of folderMap[tg.id]) {
+    if (this.isOpen == 1) return;
+    this.isOpen = 1;
+    var nf = newFolderWindow(this.id);
+    if (this.id in folderMap) {
+        for (var edom of folderMap[this.id]) {
             nf.appendChild(edom);
         }
     }
@@ -166,9 +208,9 @@ function rightClick(e) {
     var om = document.getElementById('optionMenu');
     if (om != null) om.parentNode.remove();
     // var isRightMB;
-    e = e || window.event;
+    // e = e || window.event;
     e.stopPropagation();
-    eventHolding = e;
+    whereRightClicked = this;
 
     // if ("which" in e) // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
     // isRightMB = e.which == 3;
@@ -180,7 +222,7 @@ function rightClick(e) {
     var optionMenu = document.createElement('p');
     optionMenu.id = 'optionMenu';
     optionMenu.innerText = '새 폴더(N)';
-    optionMenu.setAttribute('onclick', 'createFolderIcon(eventHolding)');
+    optionMenu.setAttribute('onclick', 'createFolderIcon(whereRightClicked)');
 
     var p1=document.createElement('p');
     p1.innerText='보기(V)'
@@ -211,16 +253,14 @@ function rightClick(e) {
     });
 }
 
-function createFolderIcon(e) {
+function createFolderIcon(parentDom) {
     /////////////////////////////////////////////////////////////////
-    // e is eventHolding coming from rightClick event
-    // e means the dom location where rightClick event occurred
+    // e is whereRightClicked coming from rightClick event
+    // e is the parent dom itself where rightClick event occurred
     /////////////////////////////////////////////////////////////////
-
 
     var om = document.getElementById('optionMenu');
     if (om != null) om.parentNode.remove();
-
 
     /////////////////////////////////////////////////////////////////
     // nf dom creation + nf.id set + folderMap,folderTree, iconMap registration
@@ -230,18 +270,18 @@ function createFolderIcon(e) {
         folderNumber++;
     }
     else nf.id = '새 폴더(' + (folderNumber++) + ')';
+    nf.isOpen = 0;
+
     folderMap[nf.id] = [];
-    if (e.target.id == '') folderTree[nf.id] = e.target.connectedFolderId;
-    else folderTree[nf.id] = e.target.id;
+    if (parentDom.id == '') {
+        folderTree[nf.id] = parentDom.connectedFolderId;
+        folderMap[parentDom.connectedFolderId].push(nf);
+    }
+    else {
+        folderTree[nf.id] = parentDom.id;
+        folderMap[parentDom.id].push(nf);
+    }
     iconMap[nf.id] = nf;
-    /////////////////////////////////////////////////////////////////
-
-
-    /////////////////////////////////////////////////////////////////
-    // there are 2 locations where a new folder can be created
-    // openFolder and desktop
-    if (e.target.className.includes('openFolder')) folderMap[e.target.connectedFolderId].push(nf);
-    else folderMap[e.target.id].push(nf);
     /////////////////////////////////////////////////////////////////
 
 
@@ -254,9 +294,6 @@ function createFolderIcon(e) {
     nf.classList.add('folder');
     subDiv.classList.add('folderImg');
     subP.classList.add('iconName');
-    // nf.position=e.target.id; // body id is necessary
-    nf.isOpen = 0;
-
 
     /////////////////////////////////////////////////////////////////
     // event registration
@@ -269,7 +306,7 @@ function createFolderIcon(e) {
     // nf.oncontextmenu=function(){return false}
     /////////////////////////////////////////////////////////////////
 
-    e.target.appendChild(nf);
+    parentDom.appendChild(nf);
 }
 
 function createIcon(s,imgPath,exePath){
@@ -305,6 +342,7 @@ function createIcon(s,imgPath,exePath){
     nf.ondragstart = dragStart;
     nf.ondragover = preventD;
     // nf.ondblclick = folderDblclick;
+    // dblclick event is defined in script.js
     nf.ondrop = drop;
     /////////////////////////////////////////////////////////////////
 
