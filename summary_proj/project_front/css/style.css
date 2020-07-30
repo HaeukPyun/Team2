@@ -140,7 +140,7 @@
 .folderPathTreeP{
     display: inline-block;
     margin: 0;
-    width: 565px;
+    width: 94.5%;
 }
 
 #optionMenuDiv {
@@ -148,7 +148,7 @@
     background-color: gainsboro;
     box-shadow: 5px 5px 2px 0px rgba(0,0,0,0.75);
     /* border: 1px solid gainsboro; */
-    width: 165px;
+    width: 160px;
     height: 165px;
     padding: 5px;
 }
